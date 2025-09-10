@@ -195,10 +195,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Result banner text
   const titles = {
-    sheep: "🐑 You are a <span class='highlight-block'>Sheep Personality Leader</span>!",
-    love_bird: "🦜 You are a <span class='highlight-block'>Love Bird Personality Leader</span>!",
-    owl: "🦉 You are an <span class='highlight-block'>Owl Personality Leader</span>!",
-    rhino: "🦏 You are a <span class='highlight-block'>Rhino Personality Leader</span>!"
+    sheep: "🐑 You are a <span class='highlight-block'>Sheep Leader</span>!",
+    love_bird: "🦜 You are a <span class='highlight-block'>Love Bird Leader</span>!",
+    owl: "🦉 You are an <span class='highlight-block'>Owl Leader</span>!",
+    rhino: "🦏 You are a <span class='highlight-block'>Rhino Leader</span>!"
   };
   const descs = {
     sheep:"The Steady Backbone! People count on you because you’re consistent and dependable. But leaning too much on safety can keep you from stepping into bigger opportunities.",
