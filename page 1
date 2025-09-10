@@ -255,7 +255,8 @@ if (ctaBottom) {
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
       <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
-        You’re Reliable! But You’re Holding Yourself Back... You’re the person everyone can count on. Your dependability and consistency make you the foundation of your business, and clients know that you’ll always deliver. You thrive in supporting roles and build trust through your steady presence.
+        You’re the rock. You lead with patience, steadiness, and loyalty. People trust you because you don’t overreact, you don’t abandon them, and you’re reliable when others crumble.
+From early on, you’ve been the steady one. The one people lean on. You like predictability, security, and clarity. You’re motivated by stability, teamwork, and building safe environments where people feel supported.
       </p>
     </div>
     
@@ -263,57 +264,75 @@ if (ctaBottom) {
     <div style="display: flex; flex-direction: column; gap: 2rem;">
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
         <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Sheep Reality Check:</h3>
-        <p><strong>But here’s the thing:</strong> you’re playing it safe. You hate conflict, you don’t like the spotlight, and you’re afraid of rejection. You’re not asserting yourself enough in marketing and sales, and you’re not delegating enough because you’re afraid of making the wrong choice. That hesitation is holding you back.</p>
-        <p><strong>You’re not stuck</strong> — you’re simply not taking enough risks to move your business into the next phase. You’ve built a strong foundation on being dependable, but to scale, you’ll need to own your leadership, step into the spotlight, and push through conflict when it arises.</p>
+        <p><strong>What drives you crazy?</strong> Chaos. Reckless leaders. Aggressive conflict. Unclear expectations. Rapid changes with no plan.</p>
+        <p><strong>What you fear</strong> — but rarely admit — You don’t want to let people down, and you don’t want to be left behind. That fear sometimes keeps you too quiet when you need to speak.</p>
+        <p><strong>Your pattern: </strong> Support → Avoid Conflict → Delay Truth → Carry Burden → Burn Out. You keep things calm, but sometimes at the cost of your own needs and authority.</p>
+
+
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Sheep Strengths:</h3>
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Sheep Core:</h3>
         <ul>
-          <li><strong>Dependability:</strong> You show up consistently, which make you the person everyone can rely on.</li>
-          <li><strong>Supportive:</strong> You thrive in roles where you help others, building a tight-knit team that trusts you.</li>
-          <li><strong>Cautious:</strong> You’re careful with decisions, ensuring that your actions are thoughtful and well-planned.</li>
-          <li><strong>Relationship-Driven:</strong> You build deep, lasting relationships with clients and colleagues, making them feel heard and valued.</li>
+          <li><strong>Strengths:</strong> Loyalty, consistency, trustworthiness.</li>
+          <li><strong>Weaknesses:</strong> Avoiding conflict, hesitating to assert, over-accommodating.</li>
+          <li><strong>Opportunity:</strong> Learn to hold the line earlier and speak truth calmly.</li>
+          <li><strong>Threat:</strong> Getting overlooked, carrying too much, losing influence.</li>
         </ul>
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Blind Spots:</h3>
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">How This Shows Up:</h3>
         <ul>
-          <li><strong>Fear of Attention:</strong> You avoid the spotlight and don’t like to promote yourself or your business. This can lead to under-marketing and low visibility.</li>
-          <li><em>Why it matters:</em> If no one knows about your business, you’ll stay small. You need to be visible and showcase your value to attract more opportunities.</li>
-          <li><strong>Conflict Avoidance:</strong> You avoid confrontation or difficult conversations, which means you may leave unresolved issues within your team or with clients.</li>
-          <li><em>Why it matters:</em> Tough conversations are necessary for growth. By avoiding them, you let problems linger and damage your ability to lead effectively.</li>
-          <li><strong>Indecision:</strong> You’re hesitant to take bold action, often second-guessing yourself. This can lead to delayed decisions that prevent you from seizing opportunities.</li>
-          <li><em>Why it matters:</em> Inaction is a decision too. You need to trust yourself more and take faster, more confident steps toward scaling your business.</li>
-          <li><strong>Reluctance to Delegate:</strong> You’re afraid to delegate because you don’t trust others to get things done to your standards.</li>
-          <li><em>Why it matters:</em> You can’t grow if you’re doing everything yourself. You need to empower your team and trust that they can handle responsibility.</li>
-        </ul>
+
+          <strong>Career & Leadership:</strong>
+<br>
+          <li>You build trust—your team feels safe with you</li>
+          <li>You’re consistent, but you can hesitate in high-pressure calls.</li>
+          <li>You protect harmony, but sometimes avoid conflict that needs to happen.</li>
+          <li>You earn loyalty but risk being seen as “too soft.</li>
+<br>
+<strong>Realtionships:</strong>
+<li>With your spouse: You’re dependable, but may not voice your needs.</li>
+<li>With your kids: You’re caring, but risk being overprotective.</li>
+<li>With colleagues: They rely on you, but may push past your boundaries.</li>
+<li>With friends: You’re supportive, but sometimes hold back truth to “keep peace.</li>
+<br>
+<strong>Health:</strong>
+<li>You like routine, but comfort can slide into complacency.</li>
+<li>You avoid extremes, which keeps you steady—but may stop growth.</li>
+<li>You put others first and neglect your own self-care.</li>
+<br>
+<strong>Finances:</strong>
+<li>You’re careful, steady, and avoid risky plays.</li>
+<li>You value stability, but may miss bold growth opportunities.</li>
+<li>You’re generous, but risk over-giving at your own expense. </li>
+                  </ul>
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Untapped Opportunities:</h3>
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Double-Edge of Your Personality:</h3>
         <ul>
-          <li><strong>Self-Promotion:</strong> Use testimonials, case studies, and social proof to show your value.</li>
-          <li><strong>Sales Process Duplication:</strong> Turn your listening/support into a repeatable sales system.</li>
-          <li><strong>Leadership Confidence:</strong> Step into the spotlight, decide faster, delegate clearly.</li>
-          <li><strong>Delegation:</strong> Build trust with simple SOPs and pass the baton.</li>
+          <strong>Superpowers:</strong>
+          <li>You’re calm under pressure.</li>
+          <li>You build loyalty and trust effortlessly.</li>
+          <li>You create stability in chaotic environments.</li><br>
+
+<strong>Blind Spots</strong>:
+<li>You avoid conflict and delay tough calls.</li>
+<li>You let loyalty override accountability.</li>
+<li>You might tend to confuse harmony with health.</li>
+<br><strong>Cost of Ignoring Growth</strong><br>
+<strong>Career</strong>: You’ll be overlooked for bolder leaders.
+<br><strong>Relationships</strong>:People will like you but not respect your authority.
+<br><strong>Health</strong>:You’ll stay comfortable but never optimal.
+<br><strong>Finances</strong>:You’ll stay safe but never build wealth.
         </ul>
       </div>
 
+     
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Real Threats:</h3>
-        <ul>
-          <li><strong>Stagnation:</strong> If you keep avoiding the spotlight, your business will stay small.</li>
-          <li><strong>Missed Growth:</strong> Cautious decisions + no delegation = limited scale.</li>
-          <li><strong>Team Bottleneck:</strong> If you don’t delegate or decide quickly, you become the blocker.</li>
-          <li><strong>Avoiding Tough Conversations:</strong> Issues compound and weaken leadership.</li>
-          <li><strong>Bottom Line:</strong> Reliability is your superpower — pair it with promotion, decisive action, and delegation.</li>
-        </ul>
-      </div>
-
-      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Domination Plan</h3>
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
         <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Audit & Awareness</h4>
         <ul>
           <li>Audit your sales pipeline: Where are you losing leads?</li>
@@ -398,7 +417,7 @@ You’re not stuck — you just need to learn how to harness your natural gifts,
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Domination Plan</h3>
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
         <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Audit & Awareness</h4>
         <ul><li>Audit your sales pipeline: Where do prospects fall off?</li><li>Define 5 relationship-driven KPIs for your team and post them publicly.</li><li>Write your sales script focused on building relationships, with discovery questions.</li><li>Set up your CRM or tracking system to monitor referrals and client feedback.</li></ul>
         <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Quick Wins</h4>
@@ -470,7 +489,7 @@ You don’t need to stop thinking strategically</strong> — you just need to le
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Domination Plan</h3>
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
         <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Audit & Awareness</h4>
         <ul><li>Audit your sales pipeline: Where do you lose leads?</li><li>Define 5 KPIs for your team and track them weekly.</li><li>Write your sales script and ensure it’s systematic with discovery questions and closing steps.</li><li>Set up automated lead nurturing to ensure no prospect is left behind.</li></ul>
         <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Quick Wins</h4>
@@ -536,7 +555,7 @@ If you don’t channel your drive into structure, you’ll keep working harder f
       </div>
 
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
-        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Domination Plan</h3>
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
         <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Audit & Awareness</h4>
         <ul><li>Audit your sales pipeline: Where are prospects dropping out?</li><li>Write down 5 decisions you control daily → choose 2 to delegate this month.</li><li>Install 1 KPI dashboard. Choose 3 key metrics for tracking performance in sales and ops.</li><li>Document 1 client win into a case study + video clip.</li><li>Set up a system for daily role play practice with your team before client calls</li></ul>
         <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Quick Wins</h4>
