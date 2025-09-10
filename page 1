@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     rhino: "🦏 You are a <span class='highlight-block'>Rhino Leader</span>!"
   };
   const descs = {
-    sheep:"The Steady Backbone! People count on you because you’re consistent and dependable. But leaning too much on safety can keep you from stepping into bigger opportunities.",
+    sheep: "Steady Loyalty. Calm Authority. Consistent Results.",
     love_bird: "You’ve risen stronger than ever. Now it’s your time to dominate.",
     owl: "You have the vision. Now you need the structure to execute it.",
     rhino: "The Power Driver.  You charge forward, make bold calls, and get results fast. But pushing too hard can burn energy, break momentum, and miss the bigger picture."
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fallback if all scores = 0
   if (!sheep && !love_bird && !owl && !rhino) {
     resultText = titles.sheep;
-   resultDesc ="The Steady Backbone! People count on you because you’re consistent and dependable. But leaning too much on safety can keep you from stepping into bigger opportunities."
+   resultDesc ="Steady Loyalty. Calm Authority. Consistent Results."
 ;
   }
 
@@ -253,7 +253,7 @@ if (ctaBottom) {
   <div class="animal-section" id="sheep-section">
     <!-- Title -->
     <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL BUSINESS QUIZ</h2>
+      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
       <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
         You’re Reliable! But You’re Holding Yourself Back... You’re the person everyone can count on. Your dependability and consistency make you the foundation of your business, and clients know that you’ll always deliver. You thrive in supporting roles and build trust through your steady presence.
       </p>
