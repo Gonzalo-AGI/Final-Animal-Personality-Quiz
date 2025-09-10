@@ -224,21 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("greeting").innerHTML =
     `Hi <span class="highlight-name">${firstName}</span>, here's your Leadership Power 👇`;
 
-  // CTA buttons → go to Page 2 and keep quiz params
-  const queryString = params.toString() + "&animal=" + topAnimal;
-
-const cta = document.getElementById("cta-btn");
-if (cta) {
-  cta.href = "https://biinse-ja.myshopify.com/pages/animal-business-quiz-page-2?" + queryString;
-  cta.textContent = "GET YOUR EXTENDED PLAN HERE!";
-}
-
-const ctaBottom = document.getElementById("cta-btn-bottom");
-if (ctaBottom) {
-  ctaBottom.href = "https://biinse-ja.myshopify.com/pages/animal-business-quiz-page-2?" + queryString;
-  ctaBottom.textContent = "GET YOUR EXTENDED PLAN HERE!";
-}
-
   // SHOW/HIDE: only show the winning animal section
   document.querySelectorAll(".animal-section").forEach(div => div.style.display = "none");
   const winnerEl = document.getElementById(topAnimal + "-section");
@@ -333,28 +318,35 @@ From early on, you’ve been the steady one. The one people lean on. You like pr
      
       <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
         <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
-        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Audit & Awareness</h4>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Speak Truth Early</h4>
         <ul>
-          <li>Audit your sales pipeline: Where are you losing leads?</li>
-          <li>Define 5 KPIs for your team and track them weekly.</li>
-          <li>Write your sales process with discovery questions and closing steps.</li>
-          <li>Set up automated lead nurturing to ensure no prospect is left behind.</li>
+<strong>Career &amp; Leadership</strong>
+          <li>Deliver 1 piece of feedback within 24 hours of noticing an issue.</li>
+          <li>Use this script: “I care about your success, which is why I need this done by Friday.”</li>
+          <li>In one meeting, set one clear non-negotiable.</li>
+<br><strong>Relationship</strong>
+<li>With spouse: Say out loud one need you’ve been holding back.</li>
+<li>With team: Instead of redoing someone’s work, ask: “What blocked you here?”</li>
+<br><strong>Health</strong>
+<li>Pick 1 comfort habit to cut (late snacking, scrolling at night). Replace with 1 growth habit (sleep, reading, walk).</li>
+<br><strong>Finances</strong>
+<li>Write down where you’ve over-given financially. Set a monthly giving cap.</li>
         </ul>
-        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Quick Wins</h4>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Hold The Line</h4>
         <ul>
           <li>Publish 1 data-driven content piece (blog/video).</li>
           <li>Daily role-play to practice the sales script.</li>
           <li>Set up automated email sequences for follow-up and reminders.</li>
           <li>Launch your referral program and track it in your CRM.</li>
         </ul>
-        <h4 style="margin-top:1rem; font-weight:600;">WEEK 3 – Execution & Delegation</h4>
+        <h4 style="margin-top:1rem; font-weight:600;">WEEK 3 – Balance Care With Accountability</h4>
         <ul>
           <li>Assign KPIs to your team and track weekly performance.</li>
           <li>Write 1 SOP for a recurring decision or process and delegate it.</li>
           <li>Host your first team training on your sales process and relationship-building.</li>
           <li>Hold 1:1 meetings to track personal and professional goals.</li>
         </ul>
-        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – Scale & Sustain</h4>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – Steady Authority</h4>
         <ul>
           <li>Review performance against KPIs.</li>
           <li>Double weekly proof content (client stories, testimonials).</li>
