@@ -1,0 +1,820 @@
+<!-- ✅ Move styles to the top -->
+<style>
+   .quiz-results {
+     max-width: 600px;
+     margin: 50px auto;
+     padding: 30px;
+     font-family: 'Helvetica Neue', sans-serif;
+     text-align: center;
+   }
+ 
+  h1 {
+     font-size: 48px;
+     font-weight: 700;
+     margin-bottom: 20px;
+     color: #1a325d;
+   }
+ 
+  h2 {
+     font-size: 24px;
+     margin-bottom: 20px;
+     color: #111;
+   }
+ 
+.highlight-block {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0169a7, #a0bede); 
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+  h3#greeting {
+     font-size: 20px;
+     margin-bottom: 30px;
+     color: #555;
+   }
+
+   .bar-bg {
+     background: #eee;
+     border-radius: 20px;
+     height: 16px;
+     margin: 10px auto 10px;
+     overflow: hidden;
+     width: 100%;
+   }
+
+   .bar {
+     height: 100%;
+     transition: width 1s ease-in-out;
+   }
+
+ #bar-sheep { background: #0169a7; }
+ #bar-love_bird { background: #dfeb05; }
+ #bar-owl { background: #049109; }
+ #bar-rhino { background: #db1304; }
+
+  .summary-text {
+     margin-top: 10px;
+     font-size: 16px;
+     line-height: 1.5;
+     color: #444;
+   }
+ 
+  .cta-wrapper {
+   margin-top: 10px;
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+   flex-wrap: wrap;
+ }
+ 
+  .alt-btn {
+     background-color: #0169a7;
+     color: white;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     padding: 20px 36px;
+     border-radius: 12px;
+     text-decoration: none;
+     transition: all 0.3s ease;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+     font-size: 20px;
+   }
+ 
+  .alt-btn:hover {
+     background-color: #095785;
+     transform: translateY(-2px);
+   }
+
+   @media (max-width: 640px) {
+     .cta-wrapper {
+       flex-direction: column;
+       align-items: center;
+     }
+     .alt-btn {
+       width: 100%;
+       max-width: 280px;
+       margin-bottom: 12px;
+     }
+     .greeting-text {
+       font-size: 18px;
+       line-height: 1.6;
+       margin-bottom: 20px;
+     }
+   }
+
+   .quiz-results {
+     padding-bottom: 10px;
+     margin-bottom: 0px;
+   }
+
+ .highlight-name {
+   font-weight: 800;
+   background: linear-gradient(to right, #1b5fa8, #a0bede);
+   padding: 2px 6px;
+   border-radius: 6px;
+   color: #ffffff;
+ }
+
+ /* helper for hidden sections */
+ .animal-section { display: none; }
+</style>
+ 
+<!-- ✅ Top summary / bars -->
+<div class="quiz-results">
+  <h1>Your Animal Personality Breakdown!</h1>
+  <h3 id="greeting" class="greeting-text"></h3>
+  <h2 id="result-title"></h2>
+  <p id="result-description" class="summary-text"></p>
+
+  <!-- Scores -->
+  <p>🐑 Sheep Personality: <span id="score-sheep">0%</span></p>
+  <div class="bar-bg"><div class="bar" id="bar-sheep"></div></div>
+ 
+  <p>🦜 Love Bird Personality: <span id="score-love_bird">0%</span></p>
+  <div class="bar-bg"><div class="bar" id="bar-love_bird"></div></div>
+ 
+  <p>🦉 Owl Personality: <span id="score-owl">0%</span></p>
+  <div class="bar-bg"><div class="bar" id="bar-owl"></div></div>
+ 
+  <p>🦏 Rhino Personality: <span id="score-rhino">0%</span></p>
+  <div class="bar-bg"><div class="bar" id="bar-rhino"></div></div>
+</div>
+ 
+ 
+<!-- ✅ Script: compute winner, set bars, show only the right section -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+
+  let sheep = parseInt(params.get("sheep")) || 0;
+  let love_bird = parseInt(params.get("love_bird")) || 0;
+  let owl = parseInt(params.get("owl")) || 0;
+  let rhino = parseInt(params.get("rhino")) || 0;
+
+  // Optional override: ?animal=sheep|love_bird|owl|rhino
+  const animalOverride = (params.get("animal") || "").trim();
+  if (["sheep", "love_bird", "owl", "rhino"].includes(animalOverride)) {
+    sheep     = (animalOverride === "sheep") ? 100 : 0;
+    love_bird = (animalOverride === "love_bird") ? 100 : 0;
+    owl       = (animalOverride === "owl") ? 100 : 0;
+    rhino     = (animalOverride === "rhino") ? 100 : 0;
+  }
+
+  const firstName = params.get("first_name") || "Leader";
+
+  // Calculate total & percentages
+  const total = sheep + love_bird + owl + rhino;
+  const sheepPercent = total ? Math.round((sheep / total) * 100) : 0;
+  const love_birdPercent = total ? Math.round((love_bird / total) * 100) : 0;
+  const owlPercent = total ? Math.round((owl / total) * 100) : 0;
+  const rhinoPercent = total ? Math.round((rhino / total) * 100) : 0;
+
+  document.getElementById("score-sheep").textContent = sheepPercent + "%";
+  document.getElementById("bar-sheep").style.width = sheepPercent + "%";
+  document.getElementById("score-love_bird").textContent = love_birdPercent + "%";
+  document.getElementById("bar-love_bird").style.width = love_birdPercent + "%";
+  document.getElementById("score-owl").textContent = owlPercent + "%";
+  document.getElementById("bar-owl").style.width = owlPercent + "%";
+  document.getElementById("score-rhino").textContent = rhinoPercent + "%";
+  document.getElementById("bar-rhino").style.width = rhinoPercent + "%";
+
+  // Decide winner with deterministic top-two tiebreak
+  const scoresRaw = { sheep, love_bird, owl, rhino };
+  const secondaryOrder = ["sheep", "love_bird", "owl", "rhino"];
+  const animals = Object.keys(scoresRaw).sort((a,b) => {
+    if (scoresRaw[b] !== scoresRaw[a]) return scoresRaw[b] - scoresRaw[a];
+    return secondaryOrder.indexOf(a) - secondaryOrder.indexOf(b);
+  });
+  const topTwo = animals.slice(0,2);
+  const topAnimal = (scoresRaw[topTwo[0]] === scoresRaw[topTwo[1]]) ? topTwo[0] : animals[0];
+
+  // Result banner text
+  const titles = {
+    sheep: "🐑 You are a <span class='highlight-block'>Sheep Leader</span>!",
+    love_bird: "🦜 You are a <span class='highlight-block'>Love Bird Leader</span>!",
+    owl: "🦉 You are an <span class='highlight-block'>Owl Leader</span>!",
+    rhino: "🦏 You are a <span class='highlight-block'>Rhino Leader</span>!"
+  };
+  const descs = {
+    sheep: "Steady Loyalty. Calm Authority. Consistent Results.",
+    love_bird: "You’ve risen stronger than ever. Now it’s your time to dominate.",
+    owl: "You have the vision. Now you need the structure to execute it.",
+    rhino: "The Power Driver.  You charge forward, make bold calls, and get results fast. But pushing too hard can burn energy, break momentum, and miss the bigger picture."
+  };
+
+  let resultText = titles[topAnimal];
+  let resultDesc = descs[topAnimal];
+
+  // Fallback if all scores = 0
+  if (!sheep && !love_bird && !owl && !rhino) {
+    resultText = titles.sheep;
+   resultDesc ="Steady Loyalty. Calm Authority. Consistent Results."
+;
+  }
+
+  document.getElementById("result-title").innerHTML = resultText;
+  document.getElementById("result-description").textContent = resultDesc;
+
+  // Greeting
+  document.getElementById("greeting").innerHTML =
+    `Hi <span class="highlight-name">${firstName}</span>, here's your Leadership Power 👇`;
+
+  // SHOW/HIDE: only show the winning animal section
+  document.querySelectorAll(".animal-section").forEach(div => div.style.display = "none");
+  const winnerEl = document.getElementById(topAnimal + "-section");
+  if (winnerEl) winnerEl.style.display = "block";
+});
+</script>
+
+<!-- ========= PLAN SECTIONS (all 4 animals, only winner shows) ========= -->
+<div id="plan-section" style="max-width: 900px; margin: auto; padding: 2rem 1rem; font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(to bottom, #f7f7f7, #ffffff);">
+
+  <!-- ================= SHEEP SECTION ================= -->
+  <div class="animal-section" id="sheep-section">
+    <!-- Title -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
+      <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
+        You’re the rock. You lead with patience, steadiness, and loyalty. People trust you because you don’t overreact, you don’t abandon them, and you’re reliable when others crumble.
+From early on, you’ve been the steady one. The one people lean on. You like predictability, security, and clarity. You’re motivated by stability, teamwork, and building safe environments where people feel supported.
+      </p>
+    </div>
+    
+    <!-- Cards -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Sheep Reality Check:</h3>
+        <p><strong>What drives you crazy?</strong> Chaos. Reckless leaders. Aggressive conflict. Unclear expectations. Rapid changes with no plan.</p>
+        <p><strong>What you fear</strong> — but rarely admit — You don’t want to let people down, and you don’t want to be left behind. That fear sometimes keeps you too quiet when you need to speak.</p>
+        <p><strong>Your pattern: </strong> Support → Avoid Conflict → Delay Truth → Carry Burden → Burn Out. You keep things calm, but sometimes at the cost of your own needs and authority.</p>
+
+
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Sheep Core:</h3>
+        <ul>
+          <li><strong>Strengths:</strong> Loyalty, consistency, trustworthiness.</li>
+          <li><strong>Weaknesses:</strong> Avoiding conflict, hesitating to assert, over-accommodating.</li>
+          <li><strong>Opportunity:</strong> Learn to hold the line earlier and speak truth calmly.</li>
+          <li><strong>Threat:</strong> Getting overlooked, carrying too much, losing influence.</li>
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">How This Shows Up:</h3>
+        <ul>
+
+          <strong>Career & Leadership:</strong>
+<br>
+          <li>You build trust—your team feels safe with you</li>
+          <li>You’re consistent, but you can hesitate in high-pressure calls.</li>
+          <li>You protect harmony, but sometimes avoid conflict that needs to happen.</li>
+          <li>You earn loyalty but risk being seen as “too soft.</li>
+<br>
+<strong>Realtionships:</strong>
+<li>With your spouse: You’re dependable, but may not voice your needs.</li>
+<li>With your kids: You’re caring, but risk being overprotective.</li>
+<li>With colleagues: They rely on you, but may push past your boundaries.</li>
+<li>With friends: You’re supportive, but sometimes hold back truth to “keep peace.</li>
+<br>
+<strong>Health:</strong>
+<li>You like routine, but comfort can slide into complacency.</li>
+<li>You avoid extremes, which keeps you steady—but may stop growth.</li>
+<li>You put others first and neglect your own self-care.</li>
+<br>
+<strong>Finances:</strong>
+<li>You’re careful, steady, and avoid risky plays.</li>
+<li>You value stability, but may miss bold growth opportunities.</li>
+<li>You’re generous, but risk over-giving at your own expense. </li>
+                  </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Double-Edge of Your Personality:</h3>
+        <ul>
+          <strong>Superpowers:</strong>
+          <li>You’re calm under pressure.</li>
+          <li>You build loyalty and trust effortlessly.</li>
+          <li>You create stability in chaotic environments.</li><br>
+
+<strong>Blind Spots</strong>:
+<li>You avoid conflict and delay tough calls.</li>
+<li>You let loyalty override accountability.</li>
+<li>You might tend to confuse harmony with health.</li>
+<br><strong>Cost of Ignoring Growth</strong><br>
+<strong>Career</strong>: You’ll be overlooked for bolder leaders.
+<br><strong>Relationships</strong>:People will like you but not respect your authority.
+<br><strong>Health</strong>:You’ll stay comfortable but never optimal.
+<br><strong>Finances</strong>:You’ll stay safe but never build wealth.
+        </ul>
+      </div>
+
+     
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – Speak Truth Early</h4>
+        <ul>
+<strong>Career &amp; Leadership</strong>
+          <li>Deliver 1 piece of feedback within 24 hours of noticing an issue.</li>
+          <li>Use this script: “I care about your success, which is why I need this done by Friday.”</li>
+          <li>In one meeting, set one clear non-negotiable.</li>
+<br><strong>Relationship</strong>
+<li>With spouse: Say out loud one need you’ve been holding back.</li>
+<li>With team: Instead of redoing someone’s work, ask: “What blocked you here?”</li>
+<br><strong>Health</strong>
+<li>Pick 1 comfort habit to cut (late snacking, scrolling at night). Replace with 1 growth habit (sleep, reading, walk).</li>
+<br><strong>Finances</strong>
+<li>Write down where you’ve over-given financially. Set a monthly giving cap.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – Hold The Line</h4>
+        <ul>
+          <strong>Career &amp; Leadership</strong>
+          <li>Deliver 1 piece of feedback within 24 hours of noticing an issue.</li>
+          <li>Use this script: “I care about your success, which is why I need this done by Friday.”</li>
+          <li>In one meeting, set one clear non-negotiable.</li>
+<br><strong>Relationship</strong>
+<li>With spouse: Say out loud one need you’ve been holding back.</li>
+<li>With team: Instead of redoing someone’s work, ask: “What blocked you here?”</li>
+<br><strong>Health</strong>
+<li>Pick 1 comfort habit to cut (late snacking, scrolling at night). Replace with 1 growth habit (sleep, reading, walk).</li>
+<br><strong>Finances</strong>
+<li>Say no to 1 financial ask that falls outside your plan.</li>
+<li>Move that money into savings instead.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">WEEK 3 – Balance Care With Accountability</h4>
+        <ul>
+          <strong>Career &amp; Leadership</strong>
+          <li>Deliver 1 piece of feedback within 24 hours of noticing an issue.</li>
+          <li>Use this script: “I care about your success, which is why I need this done by Friday.”</li>
+          <li>In one meeting, set one clear non-negotiable.</li>
+<br><strong>Relationship</strong>
+<li>With spouse: Say out loud one need you’ve been holding back.</li>
+<li>With team: Instead of redoing someone’s work, ask: “What blocked you here?”</li>
+<br><strong>Health</strong>
+<li>Pick 1 comfort habit to cut (late snacking, scrolling at night). Replace with 1 growth habit (sleep, reading, walk).</li>
+<br><strong>Finances</strong>
+<li>Review budget Sunday, adjust only once.</li>
+<li>Set one “growth” move: small investment, training, or tool.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – Steady Authority</h4>
+        <ul>
+          <strong>Career &amp; Leadership</strong>
+          <li>Deliver 1 piece of feedback within 24 hours of noticing an issue.</li>
+          <li>Use this script: “I care about your success, which is why I need this done by Friday.”</li>
+          <li>In one meeting, set one clear non-negotiable.</li>
+<br><strong>Relationship</strong>
+<li>With spouse: Say out loud one need you’ve been holding back.</li>
+<li>With team: Instead of redoing someone’s work, ask: “What blocked you here?”</li>
+<br><strong>Health</strong>
+<li>Pick 1 comfort habit to cut (late snacking, scrolling at night). Replace with 1 growth habit (sleep, reading, walk).</li>
+<br><strong>Finances</strong>
+<li>Automate 1 savings or bill system.</li>
+<li>Review quarterly financial goals with accountability.</li>
+        </ul>
+      </div>
+    </div>
+  </div> <!-- /#sheep-section -->
+
+<!-- ================= LOVE BIRD SECTION ================= -->
+  <div class="animal-section" id="love_bird-section">
+    <!-- Title -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
+      <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
+        You light up the room. You thrive on energy, people, and connection. You don’t just want to get things done—you want people to feel something while doing it. You motivate, inspire, and persuade. Your gift is influence.
+      </p>
+    </div>
+    
+    <!-- Cards -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <!-- Reality Check -->
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Love Bird Reality Check:</h3>
+        <p><strong>Who You Are</strong>:From early on, you’ve been the life of the group—the one people look to for energy and direction. You get bored with routine, you love recognition, and you want to win with style, not just grit.</p>
+        <p><strong>What drives you crazy?</strong> Boring meetings. Cold, robotic leadership. Environments with no energy, no recognition, and no vision.</p>
+        <p><strong>What you fear</strong>: irrelevance. You hate being ignored or overlooked. You want to be seen, valued, and remembered.</p>
+        <p><strong>Your Pattern</strong></p>: Excite → Overcommit → Lose Focus → Scramble → Charm Your Way Out. You win influence quickly, but you risk credibility if you don’t follow through.
+
+      </div>
+
+      <!-- Core -->
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Love Bird Core:</h3>
+        <ul>
+          <li><strong>Strengths:</strong> Charisma, communication, inspiration.</li>
+          <li><strong>Weaknesses:</strong> Distraction, inconsistency, overpromising.</li>
+          <li><strong>Opportunity:</strong> Pair influence with discipline.</li>
+          <li><strong>Threat:</strong> Burnout, broken trust, and missed opportunities.</li>
+        </ul>
+      </div>
+
+      <!-- How This Shows Up -->
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">How This Shows Up:</h3>
+        <ul>
+          <strong>Career & Leadership:</strong>
+          <li>You’re magnetic—you can rally people faster than anyone else.</li>
+          <li>You keep energy high, but your follow-through can lag.</li>
+          <li>You sell vision, but if you don’t ground it, people stop believing.</li>
+          <li>Your charisma is a strength—but it can’t replace discipline.</li>
+          <br>
+          <strong>Relationships:</strong>
+          <li>With your spouse: You’re fun, engaging, but sometimes shallow on consistency.</li>
+          <li>With your kids: You encourage and celebrate them, but sometimes lack structure.</li>
+          <li>With colleagues: They love your energy, but may question if you’ll deliver.</li>
+          <li>With clients: You win them easily, but risk losing them if details slip.</li>
+          <br>
+          <strong>Health:</strong>
+          <li>You thrive on fun—group workouts, classes, challenges.</li>
+          <li>You hate boring, repetitive routines.</li>
+          <li>You run on social energy, but without structure you burn out.</li>
+          <br>
+          <strong>Finances:</strong>
+          <li>You spend on experiences, recognition, and appearances.</li>
+          <li>You’re generous, but sometimes impulsive.</li>
+          <li>You can grow wealth when you add structure to your vision. </li>
+        </ul>
+      </div>
+
+      <!-- Double-Edge -->
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Double-Edge of Your Personality:</h3>
+        <ul>
+          <strong>Superpowers:</strong>
+          <li>You motivate others when they feel flat.</li>
+          <li>You’re persuasive and magnetic.</li>
+          <li>You can shift energy in a room instantly.</li><br>
+
+          <strong>Blind Spots:</strong>
+          <li>You chase shiny objects.</li>
+          <li>You overpromise in the moment.</li>
+          <li>You rely on charm instead of systems.</li><br>
+
+          <strong>Cost of Ignoring Growth</strong><br>
+          <strong>Career:</strong> You’ll be liked, but not trusted with the highest levels of responsibility.<br>
+          <strong>Relationships:</strong> People will enjoy you but struggle to depend on you.<br>
+          <strong>Health:</strong> Your energy will spike and crash.<br>
+          <strong>Finances:</strong>You’ll live for the moment but miss long-term stability.
+        </ul>
+      </div>
+
+      <!-- 30-Day Plan -->
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Limit yourself to 3 priorities this week—write them down, track them daily.</li><br>
+          <li>Open every meeting with a story to inspire, but close with 3 bullet-point actions.</li>
+          <li>“Here’s what we’re aiming for, here’s how we’ll do it, and here’s who owns it.”</li>
+          <strong>Relationships</strong><br>
+          <li>With spouse: Plan 1 fun experience midweek, not just weekends.</li>
+          <li>With team: Recognize at least 1 person daily.</li>
+          <strong>Health</strong><li>Pick 1 group activity this week—class, partner workout, team run.</li><br>
+          <li>Track your energy levels daily.</li>
+          <strong>Finances</strong><li>Write down every purchase this week. Awareness builds discipline.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Identify 1 area where you overpromised—deliver it fully this week.</li><br>
+          <li>Use a visible scoreboard for your team’s top goals.</li>
+          <strong>Relationships</strong><li>With spouse/kids: Follow through on 1 small promise you’ve delayed.</li><br>
+          <li>With colleagues: Send a 1-line progress update daily on what you finished.</li>
+          <strong>Health</strong><li>Commit to 3 workouts—log them publicly (accountability).</li><br>
+          <li>Replace 1 late-night social distraction with sleep.</li>
+          <strong>Finances</strong><li>Put a 24-hour pause on any non-essential spending.</li>
+          <li>Move $X into savings before Friday.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 3 – <!-- title --></h4>
+        <ul>
+          <strong><strong>Career & Leadership</strong><li>Create a weekly rhythm: 1 vision meeting (energy), 1 check-in (progress).</li><br>
+          <li>Document 1 process that usually gets messy and simplify it.</li>
+          <strong>Relationships</strong><li>With spouse: Share your weekly goals.</li><br>
+          <li>With kids: Set 1 consistent routine (bedtime, study time).</li>
+          <strong>Health</strong><li>Add 1 recovery activity: yoga, stretching, journaling.</li><br>
+          <li>Track your nutrition 3 days this week.</li>
+          <strong>Finances</strong><li>Review your last 30 days of spending—categorize it.</li>
+          <li>Identify 1 recurring expense to cut. </li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Run a meeting with this flow: Story → Facts → Plan → Owners.</li><br>
+          <li>Delegate 1 responsibility you usually carry.</li>
+          <li>Ask for feedback from 1 trusted peer on how consistent you’ve been this month.</li>
+          <strong>Relationships</strong><li>With spouse: Plan a vision conversation (future-focused).</li><br>
+          <li>With kids: Celebrate effort, not just results.</li>
+          <li>With team: Recognize 2 wins publicly this week.</li>
+          <strong>Health</strong><li>Lock in 3 workouts + 2 recovery days.</li><br>
+          <li>Spend 1 block of 3 hours completely offline.</li>
+          <strong>Finances</strong><li>Automate 1 process (savings transfer, bill pay).</li>
+          <li>Review quarterly financial goals with accountability partner.</li>
+        </ul>
+      </div>
+    </div>
+  </div> <!-- /#love_bird-section -->
+
+  <!-- ================= OWL SECTION ================= -->
+  <div class="animal-section" id="owl-section">
+    <!-- Title -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
+      <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
+        You don’t move until you’re sure. You analyze, measure, and calculate. You see the details no one else sees, the errors others ignore, the risks others rush past. You pride yourself on accuracy, structure, and consistency.
+From an early age, you’ve been the one who triple-checks, asks the hard questions, and digs for clarity. You’re motivated by precision, stability, and being the person others can count on to “get it right.”
+      </p>
+    </div>
+    
+    <!-- Cards -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Owl Reality Check:</h3>
+        <p><strong>What drives you crazy?</strong> Sloppiness. Missed details. People who “wing it.” Rash decisions with no data to back them up. Leaders who over-promise and under-deliver.</p>
+        <p><strong>What you fear — but rarely admit —</strong> failure through oversight. You worry about being blamed for mistakes, for missing something, for being exposed. That’s why you over-prepare, over-analyze, and sometimes hold back too long.</p>
+        <p><strong>Your pattern:</strong> Analyze → Delay → Hesitate → Lose Momentum → Regret. You win trust through accuracy, but you sometimes miss opportunities because you can’t pull the trigger fast enough.</p>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Owl Core:</h3>
+        <ul>
+          <li><strong>Strengths:</strong> Precision, discipline, high standards.</li>
+          <li><strong>Weaknesses:</strong> Overthinking, hesitation, rigidity.</li>
+          <li><strong>Opportunity:</strong> Learn to move with 80% of the data.</li>
+          <li><strong>Threat:</strong> Paralysis by analysis, loss of influence, missed windows.</li>
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">How This Shows Up:</h3>
+        <ul>
+          <strong>Career & Leadership:</strong>
+          <li>You’re respected for your standards and quality of work.</li>
+          <li>You lead with thoroughness, but teams can get frustrated by your delays.</li>
+          <li>You demand excellence, but people may feel nitpicked or micromanaged.</li>
+          <li>You prevent errors but sometimes block innovation.</li>
+          <br>
+          <strong>Relationships:</strong>
+          <li>With your spouse: You keep stability, but you can come across distant or overly critical.</li>
+          <li>With your kids: You teach responsibility, but may not celebrate effort enough.</li>
+          <li>With colleagues: They trust your work, but may avoid your feedback if it feels too harsh or detail-heavy.</li>
+          <li>With friends: You’re steady and reliable, but not always spontaneous.</li>
+          <br>
+          <strong>Health:</strong>
+          <li>You track, monitor, and measure—but you get stuck in planning instead of moving.</li>
+          <li>You play it safe, sometimes missing opportunities to push your body or energy further.</li>
+          <li>You’re disciplined when locked in, but fall off when overthinking takes over.</li>
+          <br>
+          <strong>Finances:</strong>
+          <li>You’re cautious and consistent with money.</li>
+          <li>You don’t gamble—you prefer proven paths.</li>
+          <li>But your hesitation sometimes costs you growth opportunities others capitalize on.</li>
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Double-Edge of Your Personality:</h3>
+        <ul>
+          <strong>Superpowers:</strong>
+          <li>You bring accuracy, reliability, and discipline to everything.</li>
+          <li>You see what others miss.</li>
+          <li>You build trust by consistently delivering at a high level.</li><br>
+
+          <strong>Blind Spots:</strong>
+          <li>You stall while waiting for perfect information.</li>
+          <li>You over-criticize, which discourages people.</li>
+          <li>You resist change, even when it’s needed.</li><br>
+
+          <strong>Cost of Ignoring Growth</strong><br>
+          <strong>Career:</strong> You’ll stay “the safe pair of hands” but never the bold leader.<br>
+          <strong>Relationships:</strong> You’ll maintain stability but miss deeper connection.<br>
+          <strong>Health:</strong> You’ll track it endlessly but never push limits.<br>
+          <strong>Finances:</strong> You’ll stay safe but never scale.
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Apply the 24-hour decision rule: if you have 80% of the data, decide within a day.</li><br>
+<li>In your next meeting, commit to one clear action instead of more analysis.</li>
+<li>Use the phrase: “Here’s what we know, here’s what we don’t, here’s the next step.”</li>
+          <strong>Relationships</strong><li>With spouse: Share one decision you’ve been delaying. Agree and move.</li><br>
+          <li>With team: Tell them upfront: “This doesn’t need to be perfect. Good enough to launch—refine after.”</li>
+          <strong>Health</strong><li>Pick one metric (steps, sleep, calories) and track it for 7 days without adjusting anything.</li><br>
+<li>Take action based on the numbers next week.</li>
+          <strong>Finances</strong><li>Make one financial move you’ve been sitting on (investment, payment, consolidation).</li>
+<li>Stop waiting for the “perfect” conditions.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Deliver one piece of feedback with this script: “Here’s what worked, here’s one adjustment, here’s why it matters.”</li><br>
+<li>Recognize effort before pointing out flaws.</li>
+          <strong>Relationships</strong><li>With spouse/kids: Say “thank you” for effort at least once a day this week.</li><br>
+<li>With colleagues: Publicly recognize one person’s win before giving critique.</li>
+          <strong>Health</strong><li>Replace one negative self-talk thought (“I should have done better”) with one positive (“I followed through”).</li><br>
+          <strong>Finances</strong><li>Review your budget once this week, but don’t change it—practice restraint.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 3 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Run one meeting where you let others propose the solution instead of you.</li><br>
+<li>Approve one idea that’s 70% right and refine it in execution.</li>
+          <strong>Relationships</strong><li>Say yes to one spontaneous request (dinner, family outing) without overthinking.</li><br>
+<li>Ask: “What do you want to do?” instead of setting the plan.</li>
+          <strong>Health</strong><li>Try one new activity: yoga, boxing, cycling—something outside your comfort zone.</li><br>
+          <strong>Finances</strong><li>Take one small calculated risk (buy a growth asset, join a mastermind, test a new revenue idea).</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Run one meeting starting with data, closing with decisions.</li><br>
+<li>Use this rhythm: Facts → Options → Decision → Owner → Deadline.</li>
+<li>Delegate one responsibility you usually micromanage.</li>
+          <strong>Relationships</strong><li>With spouse: Have one conversation about future vision, not just current issues.</li><br>
+<li>With kids: Ask their perspective on something important and validate it.</li>
+<li>With team: Publicly recognize progress, not just perfection.</li>
+          <strong>Health</strong><li>Solidify one sustainable rhythm (3 workouts, 2 recovery days).</li><br>
+<li>End work by 9 PM at least twice this week.</li>
+          <strong>Finances</strong><li>Automate one financial system (bill pay, savings, investing).</li>
+<li>Review your numbers once, then let the system run.</li>
+        </ul>
+      </div>
+    </div>
+  </div> <!-- /#owl-section -->
+
+  <!-- ================= RHINO SECTION ================= -->
+  <div class="animal-section" id="rhino-section">
+    <!-- Title -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.3rem; font-weight: 700; color: #005181;">THE ANIMAL PERSONALITY QUIZ</h2>
+      <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: auto;">
+        You don’t hesitate. You’d rather make a wrong decision fast than sit in limbo. You’re wired for speed, competition, and control. When others are stuck in endless debate, you’ve already made the call and moved three steps ahead.
+From early on, you’ve been this way—impatient with delay, frustrated by weakness, drawn to challenges. You’re fueled by targets, deadlines, and measurable wins. You thrive when the pressure is on and others are watching.
+      </p>
+    </div>
+    
+    <!-- Cards -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Rhino Reality Check:</h3>
+        <p><strong>What drives you crazy?</strong> Excuses. Hesitation. People who “don’t get it.” Endless meetings that go nowhere. Anyone who wastes your time.</p>
+        <p><strong>What you fear — but rarely admit —</strong> losing control. Being seen as weak. Missing the window. That’s why you push, and why you’ll always default to speed.</p>
+        <p><strong>Your pattern:</strong> Charge → Push Hard → Snap → Double Down → Break Trust → Repeat. You’ve lived it in boardrooms, at home, and even in your own head. You win quick battles, but sometimes lose long-term loyalty.</p>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">Your Rhino Core:</h3>
+        <ul>
+          <li><strong>Strengths:</strong> Decisiveness, courage, urgency.</li>
+          <li><strong>Weaknesses:</strong> Impatience, intensity, blind spots.</li>
+          <li><strong>Opportunity:</strong> Learn to turn force into influence.</li>
+          <li><strong>Threat:</strong> Burnout, broken trust, and eroded credibility.</li>
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">How This Shows Up:</h3>
+        <ul>
+          <strong>Career & Leadership:</strong>
+          <li>You drive projects faster than anyone else—but your team scrambles to keep up.</li>
+          <li>You dominate meetings, but risk leaving people confused or disengaged.</li>
+          <li>When challenged, you double down. Sometimes it wins respect; sometimes it creates silence.</li>
+          <li>You build momentum quickly, but sustaining it requires discipline, not just force.</li>
+          <br>
+          <strong>Relationships:</strong>
+          <li>With your spouse: You want problems solved quickly, but your tone can feel cold or dismissive.</li>
+          <li>With your kids: You push them to excel, but may overlook their need for encouragement.</li>
+          <li>With colleagues: You’re respected for results, but people may avoid bringing you bad news.</li>
+          <li>With friends: You don’t do small talk—you want real conversations, real progress.</li>
+          <br>
+          <strong>Health:</strong>
+          <li>You train like you lead—hard, fast, aggressive.</li>
+          <li>You sacrifice sleep and recovery in the name of progress.</li>
+          <li>You see “slowing down” as weakness, but it’s what keeps you from breaking down.</li>
+          <br>
+          <strong>Finances:</strong>
+          <li>You play bold, not safe. You like big targets and big bets.</li>
+          <li>When you’re patient and focused, you build wealth.</li>
+          <li>When you’re impulsive, you overextend and regret it later. </li>
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;">The Double-Edge of Your Personality:</h3>
+        <ul>
+          <strong>Superpowers:</strong>
+          <li> You make decisions in minutes that others debate for weeks.</li>
+          <li>You inspire urgency and action in the people around you.</li>
+          <li>You thrive under pressure—where others crumble, you come alive.</li><br>
+
+          <strong>Blind Spots:</strong>
+          <li>You think pushing harder is always the solution.</li>
+          <li>You equate speed with effectiveness.</li>
+          <li>You see opposition as threat instead of feedback.</li><br>
+
+          <strong>Cost of Ignoring Growth</strong><br>
+          <strong>Career:</strong> You’ll keep winning battles but lose the loyalty of high performers.<br>
+          <strong>Relationships:</strong> Your family may feel like soldiers, not partners.<br>
+          <strong>Health</strong>:You’ll burn hot, crash hard, and shorten your prime years.<br>
+          <strong>Finances:</strong> Your impatience will keep costing you in unnecessary risks.
+        </ul>
+      </div>
+
+      <div style="background:#D6ECFA; backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+        <h3 style="color:#1a325d; font-size:2.0rem; font-weight:700;">30-Day Personality Plan</h3>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 1 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Before every directive, write the one-sentence version: Target + Reason + Deadline.</li><br>
+<li>In your next 3 meetings, open with: “Here’s the outcome, here’s why it matters, here’s who owns it.”</li>
+<li>End directives with: “Repeat back what you heard.” Train people to mirror clarity.</li>
+          <strong>Relationships</strong><li>With spouse: Have one conversation this week where you listen for 10 minutes without interrupting.</li><br>
+          <strong>Health</strong><li>Pick one consistent metric to track daily: hours of sleep or step count</li><br>
+          <strong>Finances</strong><li>Write down your top 3 financial goals for the quarter. Post them somewhere visible.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 2 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Install the 60-second pause rule: When frustration spikes, stop and breathe before responding.</li><br>
+<li>Use the phrase: “The expectation stands—what do you need to succeed?” twice this week.</li>
+<li>Give 1 piece of feedback using the Truth + Belief formula: “This missed the mark, but I know you can fix it.”</li>
+          <strong>Relationships</strong><li>With spouse: Instead of giving solutions, ask: “What do you need from me right now?”</li><br>
+<li>With kids: Recognize effort, not just results. Say: “I noticed how hard you worked, not just the score.”</li>
+<li>With team: Publicly recognize 2 wins before you give 1 critique.</li>
+          <strong>Health</strong><li>Track caffeine intake—cap at 2 servings/day.</li><br>
+<li>Replace one late-night work sprint with sleep.</li>
+          <strong>Finances</strong><li>Enforce a 24-hour delay on any spending or investment decision above $5k.</li>
+<li>Ask your finance lead for one blind spot you’ve ignored—act on it.</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 3 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Commit to one project this week without pivoting. See it through.</li><br>
+<li>Document your last 3 “snap” moments: What did it cost in trust, time, or momentum? Review with a mentor/coach.</li>
+<li>In 1 meeting, ask 3 open-ended questions before making your decision.</li>
+          <strong>Relationships</strong><li>Schedule 1 hour of non-negotiable family time midweek.</li><br>
+<li>Text one friend/mentor: “Thinking of you—appreciate you.”</li>
+          <strong>Health</strong><li>Lock in a health non-negotiable: 7 hours of sleep, 10k steps, or 3 clean meals daily</li><br>
+<li>Add 1 recovery activity: stretch, sauna, meditation, or downtime.</li>
+          <strong>Finances</strong><li>Review your portfolio or business budget—highlight one area where impatience has cost you.</li>
+<li>Shift one expense from “impulse-driven” to “growth-driven.”</li>
+        </ul>
+        <h4 style="margin-top:1rem; font-weight:600;">Week 4 – <!-- title --></h4>
+        <ul>
+          <strong>Career & Leadership</strong><li>Run one meeting using this rhythm: Facts → Plan → Ownership → Deadline.</li><br>
+<li>Delegate one task you’ve been holding onto for control.</li>
+<li>Have one 15-minute check-in with a key team member focused only on them.</li>
+          <strong>Relationships</strong><li>With spouse: Share one future vision conversation (not logistics).</li><br>
+<li>With kids: Ask their opinion on one decision—validate it.</li>
+<li>With team: Publicly recognize 2 people for progress, not just results.</li>
+          <strong>Health</strong><li>Lock in 3 workouts + 2 recovery sessions.</li><br>
+<li>Schedule one “off grid” 3-hour block—no phone, no email, just reset.</li>
+          <strong>Finances</strong><li>Automate 1 recurring financial process this week (savings transfer, expense approval, investment contribution).</li>
+<li>Review quarterly targets with your finance lead and map 3 adjustments.</li>
+        </ul>
+      </div>
+    </div>
+  </div> <!-- /#rhino-section -->
+
+  <!-- ===================== CTA + Buttons ===================== -->
+  <div style="text-align:center; padding:3rem 1rem;">
+    <style>
+       .bounce-button-xl {
+         display:inline-block;
+         padding:24px 64px;
+         margin:1rem;
+         font-size:1.4rem;
+         font-weight:800;
+         text-decoration:none;
+         border-radius:999px;
+         box-shadow:0 10px 35px rgba(0,0,0,0.15);
+         transition:transform 0.3s ease, box-shadow 0.3s ease;
+         animation:pulseGradient 5s infinite linear;
+         background-size:200% 200%;
+         color:white;
+         background-image:linear-gradient(270deg, #1a325d, #1a325d, #1a325d);
+       }
+       .bounce-button-xl:hover {
+         transform:scale(1.07) translateY(-6px);
+         box-shadow:0 16px 50px rgba(0,0,0,0.2);
+       }
+       @keyframes pulseGradient {
+         0% { background-position: 0% 50%; }
+         50% { background-position: 100% 50%; }
+         100% { background-position: 0% 50%; }
+       }
+       @media (max-width: 500px) {
+         .bounce-button-xl { font-size: 1.1rem; padding: 18px 36px; }
+       }
+    </style>
+
+    <h3 style="color:#1a325d; font-size:1.5rem; font-weight:700;"> 
+      Acceleration Rule – Delegate Daily!
+    </h3>
+    <p style="font-size:1.2rem; color:#444; max-width:700px; margin:0 auto 2rem auto; line-height:1.6;">
+      Every day for 30 days, give away one task you normally handle. By Day 30, your team will be managing your client connections and relationships just like you. That’s how a leader builds and scales.
+    </p>
+    <a href="https://coaching.itsrichardmartinez.com/calendar-page" class="bounce-button-xl">
+      BOOK YOUR FREE CONSULTATION
+    </a>
+  </div> <!-- /#plan-section -->
